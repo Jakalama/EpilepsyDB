@@ -1,0 +1,62 @@
+﻿@model EpilepsieDB.Web.View.ViewModels.Invite
+
+@{
+    ViewData["Title"] = "Invite";
+}
+
+<h1>Invite</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Invite">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Systemadmin</label>
+                <input asp-for="IsSystemadmin" class="form-control" />
+                <span asp-validation-for="IsSystemadmin" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">full user</label>
+                <input asp-for="IsUser" class="form-control" />
+                <span asp-validation-for="IsUser" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">allowed to edit scans</label>
+                <input asp-for="IsScanCreator" class="form-control" />
+                <span asp-validation-for="IsScanCreator" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">allowed to download</label>
+                <input asp-for="IsScanDownloader" class="form-control" />
+                <span asp-validation-for="IsScanDownloader" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">allowed to view</label>
+                <input asp-for="IsScanReader" class="form-control" />
+                <span asp-validation-for="IsScanReader" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+
+        <p>Note:</p>
+        <p>
+            Permissions with generous rights also grant the permissions with less rights.
+        </p>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

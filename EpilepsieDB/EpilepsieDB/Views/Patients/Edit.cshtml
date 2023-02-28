@@ -1,0 +1,65 @@
+﻿@model EpilepsieDB.Web.View.ViewModels.PatientEditDto
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Patient</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form enctype="multipart/form-data"  asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="PatientID" />
+            <div class="form-group">
+                <label asp-for="Acronym" class="control-label"></label>
+                <input asp-for="Acronym" class="form-control" />
+                <span asp-validation-for="Acronym" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NiftiFile" class="control-label"></label>
+                <input asp-for="NiftiFile" class="form-control" accept=".nii" />
+                <span asp-validation-for="NiftiFile" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MriImage" class="control-label"></label>
+                <input asp-for="MriImage" class="form-control" accept=".png, .jpg, .jpeg" />
+                <span asp-validation-for="MriImage" class="text-danger"></span>
+            </div>
+
+            <div class="imageContainer">
+                <img class="imagePreview" id="picturePreview" src="\@Model.MriImagePath" width="300" height="300" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+<style>
+    div.imageContainer {
+        width: 300px;
+        height: 300px;
+        padding: 2.5px 2.5px;
+        margin: 50px 0 50px 0;
+        border: 1px solid #4e4e4e;
+        border-radius: 10px;
+    }
+
+    img.imagePreview {
+    }
+</style>

@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpilepsieDB", "EpilepsieDB\EpilepsieDB.csproj", "{FD424F85-D214-4652-A3C7-744197989573}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EpilepsieDB.Tests", "EpilepsieDB.Tests\EpilepsieDB.Tests.csproj", "{53E231BC-84BD-4D7F-944B-2AE34D15AFBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD424F85-D214-4652-A3C7-744197989573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD424F85-D214-4652-A3C7-744197989573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD424F85-D214-4652-A3C7-744197989573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD424F85-D214-4652-A3C7-744197989573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53E231BC-84BD-4D7F-944B-2AE34D15AFBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53E231BC-84BD-4D7F-944B-2AE34D15AFBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53E231BC-84BD-4D7F-944B-2AE34D15AFBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53E231BC-84BD-4D7F-944B-2AE34D15AFBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CE1804E-1416-40D2-BC86-1C06603D42E1}
+	EndGlobalSection
+EndGlobal

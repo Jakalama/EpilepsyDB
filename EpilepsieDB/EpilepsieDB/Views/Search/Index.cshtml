@@ -1,0 +1,157 @@
+﻿@model EpilepsieDB.Web.View.ViewModels.SearchResult
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>Search</h1>
+
+<hr />
+
+<form class="mb-5" asp-action="Index" method="get">
+    <div class="form-actions">
+        <input class="myForm" placeholder="Find Scan" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+        <input type="submit" value="Search" class="myBtn" /> |
+        <a class="font-white" asp-action="Index">Back to Full List</a>
+    </div>
+</form>
+
+<table class="table font-white ">
+    <thead>
+        <tr>
+            <th>
+                Scan
+            </th>
+            <th>
+                EDF Version
+            </th>
+            <th>
+                Patient Info
+            </th>
+            <th>
+                Record Info
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                Start Time
+            </th>
+            <th>
+                Labels
+            </th>
+            <th>
+                Transducer Types
+            </th>
+            <th>
+                Physical Dimensions
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var patientPair in Model.Results) {
+            <tr class="level1">
+                <td>
+                    @Html.DisplayFor(modelItem => patientPair.Key.Acronym)
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a asp-controller="Patients" asp-action="Details" asp-route-id="@patientPair.Key.ID">Details</a>
+                </td>
+            </tr>
+
+            foreach (var recordingPair in patientPair.Value) {
+                <tr class="level2">
+                    <td>
+                        @Html.DisplayFor(modelItem => recordingPair.Key.RecordingNumber)
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a asp-controller="Recordings" asp-action="Details" asp-route-id="@recordingPair.Key.ID">Details</a></td>
+                </tr>
+
+                foreach (var scan in recordingPair.Value) {
+                    <tr class="level3">
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.ScanNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.Version)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.PatientInfo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.RecordInfo)
+                        </td>
+                        <td>
+                            @scan.StartDate.ToShortDateString()
+                        </td>
+                        <td>
+                            @scan.StartTime.ToShortTimeString()
+                        </td>
+                        <td style="max-width:110px; max-height:200px; overflow:hidden; display: -webkit-box; text-overflow:ellipsis;">
+                            @Html.DisplayFor(modelItem => scan.Labels)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.TransducerTypes)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => scan.PhysicalDimensions)
+                        </td>
+                        <td>
+                            <a asp-controller="Scans" asp-action="Details" asp-route-id="@scan.ID">Details</a>
+                        </td>
+                    </tr>
+                }
+            }
+        }
+    </tbody>
+</table>
+
+<style>
+    .myForm {
+        width: 400px;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    thead th {
+        padding: 5px;
+    }
+
+    table td {
+        padding: 5px;
+    }
+
+    tr.level1 td {
+        font-size: large;
+        font-weight: bold;
+    }
+
+    tr.level2 td:first-child {
+        padding-left: 25px;
+        font-weight: bold;
+    }
+
+    tr.level3 td:first-child {
+        padding-left: 50px;
+    }
+</style>

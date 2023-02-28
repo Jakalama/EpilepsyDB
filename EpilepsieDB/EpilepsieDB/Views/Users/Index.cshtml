@@ -1,0 +1,27 @@
+﻿@model IEnumerable<EpilepsieDB.Web.View.ViewModels.UserInfo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User</h1>
+
+<p>
+    <a asp-action="Invite" asp-controller="Users">Invite New User</a>
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div>
+        <div>
+            @Html.DisplayFor(modelItem => item.Email)
+        </div>
+
+        <a asp-action="Delete" asp-controller="Users" asp-route-id="@item.ID">Delete User</a> |
+        <a asp-action="EditRole" asp-controller="Users" asp-route-id="@item.ID">Edit Permission</a>
+    </div>
+}
+
+
+

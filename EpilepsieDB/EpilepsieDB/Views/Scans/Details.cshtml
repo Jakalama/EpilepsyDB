@@ -1,0 +1,225 @@
+﻿@model EpilepsieDB.Web.View.ViewModels.ScanDetailDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Scan</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientAcronym)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PatientAcronym)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RecordingNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RecordingNumber)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ScanNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ScanNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Version)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Version)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientInfo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PatientInfo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RecordInfo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RecordInfo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt class="col-sm-2">
+            Start Time
+        </dt>
+        <dd class="col-sm-10">
+            @Model.StartDate.ToLongTimeString()
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfRecords)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfRecords)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DurationOfDataRecord)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DurationOfDataRecord)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NumberOfSignals)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberOfSignals)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Labels)
+        </dt>
+        <dd class="col-sm-10" style="overflow: hidden; text-overflow:ellipsis;">
+            @Html.DisplayFor(model => model.Labels)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TransducerTypes)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransducerTypes)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhysicalDimensions)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhysicalDimensions)
+        </dd>
+    </dl>
+
+    <div>
+        <a asp-controller="Downloads" asp-action="DownloadScan" asp-route-scanId="@Model.ScanID">Download File</a>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.ScanID">Edit</a> |
+    <a asp-controller="Recordings" asp-action="Details" asp-route-id="@Model.RecordingID">Back to List</a>
+</div>
+
+<hr />
+
+<div>
+    <h4>
+        Electrodes
+    </h4>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Channel
+                </td>
+                <td>
+                    Label
+                </td>
+                <td>
+                    Type
+                </td>
+                <td>
+                    Gain
+                </td>
+                <td>
+                    Samples
+                </td>
+                <td>
+                    Sampling Rate
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Electrodes)
+            {
+                <tr>
+                    <td>
+                        @item.ElectrodeNumber
+                    </td>
+                    <td>
+                        @item.Label
+                    </td>
+                    <td>
+                        @item.Type
+                    </td>
+                    <td>
+                        @((float)Math.Round(item.Gain, 4))
+                    </td>
+                    <td>
+                        @item.Samples
+                    </td>
+                    <td>
+                        @item.SamplingRate
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <hr />
+
+    <h4>
+        Blocks
+    </h4>
+    <table>
+        <thead>
+            <tr>
+                <td>
+                    Block Nr.
+                </td>
+                <td>
+                    Duration
+                </td>
+                <td>
+                    Ch.
+                </td>
+                <td>
+                    Begin
+                </td>
+                <td>
+                    End
+                </td>
+                <td>
+                    Gap
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Blocks)
+            {
+                <tr>
+                    <td>
+                        @item.BlockNumber
+                    </td>
+                    <td>
+                        @item.Duration
+                    </td>
+                    <td>
+                        @item.NumChannels
+                    </td>
+                    <td>
+                        @item.Starttime.ToString("dd.MM.yyyy HH:mm:ss.f")
+                    </td>
+                    <td>
+                        @item.Endtime.ToString("dd.MM.yyyy HH:mm:ss.f")
+                    </td>
+                    <td>
+                        @item.Gap
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    td {
+        min-width: 30px;
+        padding-right: 8px;
+    }
+</style>

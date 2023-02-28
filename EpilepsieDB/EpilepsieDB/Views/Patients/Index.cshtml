@@ -1,0 +1,35 @@
+﻿@model IEnumerable<EpilepsieDB.Web.View.ViewModels.PatientDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table font-white ">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Acronym)
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Acronym)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.PatientID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.PatientID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.PatientID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

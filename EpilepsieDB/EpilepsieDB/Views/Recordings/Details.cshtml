@@ -1,0 +1,64 @@
+﻿@model EpilepsieDB.Web.View.ViewModels.RecordingDetailDto
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Recording</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PatientAcronym)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PatientAcronym)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.RecordingNumber)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecordingNumber)
+        </dd>
+    </dl>
+    <div>
+        <a asp-controller="Downloads" asp-action="DownloadScansByRecording" asp-route-recordingID="@Model.RecordingID">Download Files</a>
+    </div>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.RecordingID">Edit</a> |
+    <a asp-controller="Patients" asp-action="Details" asp-route-id="@Model.PatientID">Back to Patient</a>
+</div>
+<hr />
+<div>
+    <h4>Scans</h4>
+    <p>
+        <a asp-controller="Scans" asp-action="Create" asp-route-recordingID="@Model.RecordingID">Add Scan</a>
+    </p>
+    <table class="table font-white ">
+        <thead>
+            <tr>
+                <th>
+                    Scan Number
+                </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Scans) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScanNumber)
+                    </td>
+                    <td>
+                        <a asp-controller="Scans" asp-action="Edit" asp-route-id="@item.ScanID">Edit</a> |
+                        <a asp-controller="Scans" asp-action="Details" asp-route-id="@item.ScanID">Details</a> |
+                        <a asp-controller="Scans" asp-action="Delete" asp-route-id="@item.ScanID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

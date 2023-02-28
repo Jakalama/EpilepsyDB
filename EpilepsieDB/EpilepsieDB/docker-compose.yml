@@ -1,0 +1,51 @@
+﻿version: '3.9'
+
+services:
+
+  db:
+    container_name: db
+    build:
+      context: ..
+      dockerfile: ./EpilepsieDB/Dockerfile.postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    networks:
+      - epilepsy_net
+    ports:
+      - 5432:5432 
+    # uncomment to store data persistent on host
+    #volumes:
+    # - /home/epilepsydb/data/db:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  epilepsydb:
+    image: epilepsydb
+    build:
+      context: ..
+      dockerfile: ./EpilepsieDB/Dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASS=${DB_PASS}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - epilepsy_net
+    ports:
+      - 5002:5001
+    # uncomment to store data persistent on host
+    #volumes:
+    #  - /home/epilepsydb/data/patientdata:/app/patientData:rw
+    #  - /home/epilepsydb/data/webdata:/app/wwwroot/nifti:rw
+
+networks:
+  epilepsy_net:
